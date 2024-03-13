@@ -37,6 +37,9 @@ gslMatrixSetZero::usage = "gslMatrixSetZero[m] sets all elements of the matrix m
 gslMatrixSetIdentity::usage = "gslMatrixSetIdentity[m] sets the matrix m to the identity matrix.";
 gslLinalgCholeskyDecomp1::usage = "gslLinalgCholeskyDecomp[m] computes the Cholesky decomposition of the matrix m.";
 
+gslAiryAi::usage = "gslAiryAi[x] returns the Airy function Ai(x).";
+Clausen::usage = "Clausen[x] returns the Clausen function Cl2(x).";
+
 Begin["`Private`"];
 
 this = DirectoryName[ $InputFileName ];
@@ -86,6 +89,70 @@ gslMatrixSetZero = ForeignFunctionLoad[lib, "gsl_matrix_set_zero", {"RawPointer"
 gslMatrixSetIdentity = ForeignFunctionLoad[lib, "gsl_matrix_set_identity", {"RawPointer"::[GSLMATRIX]} -> "Void"];
 
 gslLinalgCholeskyDecomp1 = ForeignFunctionLoad[lib, "gsl_linalg_cholesky_decomp1", {"RawPointer"::[GSLMATRIX]} -> "CInt"];
+
+(* special functions *)
+
+(* typedef structs *)
+GSLSFRESULT = {"CDouble", "CDouble"};
+GSLSFRESULTE10 = {"CDouble", "CDouble", "CInt"};
+
+(*
+#define GSL_PREC_DOUBLE  0
+#define GSL_PREC_SINGLE  1
+#define GSL_PREC_APPROX  2
+*)
+
+GSLPRECDOUBLE = 0;
+GSLPRECSINGLE = 1;
+GSLPRECAPPROX = 2;
+GSLMODET = "CUnsignedInt";
+
+iAiryAi = ForeignFunctionLoad[lib, "gsl_sf_airy_Ai", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryAi[x_Real] := iAiryAi[x, GSLPRECDOUBLE];
+
+iAiryBi = ForeignFunctionLoad[lib, "gsl_sf_airy_Bi", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryBi[x_Real] := iAiryBi[x, GSLPRECDOUBLE];
+
+iAiryAiScaled = ForeignFunctionLoad[lib, "gsl_sf_airy_Ai_scaled", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryAiScaled[x_Real] := iAiryAiScaled[x, GSLPRECDOUBLE];
+
+iAiryBiScaled = ForeignFunctionLoad[lib, "gsl_sf_airy_Bi_scaled", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryBiScaled[x_Real] := iAiryBiScaled[x, GSLPRECDOUBLE];
+
+iAiryAiDeriv = ForeignFunctionLoad[lib, "gsl_sf_airy_Ai_deriv", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryAiDeriv[x_Real] := iAiryAiDeriv[x, GSLPRECDOUBLE];
+
+iAiryBiDeriv = ForeignFunctionLoad[lib, "gsl_sf_airy_Bi_deriv", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryBiDeriv[x_Real] := iAiryBiDeriv[x, GSLPRECDOUBLE];
+
+iAiryAiDerivScaled = ForeignFunctionLoad[lib, "gsl_sf_airy_Ai_deriv_scaled", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryAiDerivScaled[x_Real] := iAiryAiDerivScaled[x, GSLPRECDOUBLE];
+
+iAiryBiDerivScaled = ForeignFunctionLoad[lib, "gsl_sf_airy_Bi_deriv_scaled", {"CDouble", GSLMODET} -> "CDouble"];
+gslAiryBiDerivScaled[x_Real] := iAiryBiDerivScaled[x, GSLPRECDOUBLE];
+
+iAiryZeroAi = ForeignFunctionLoad[lib, "gsl_sf_airy_zero_Ai", {"CInt"} -> "CDouble"];
+gslAiryZeroAi[n_Integer] := iAiryZeroAi[n];
+
+iAiryZeroBi = ForeignFunctionLoad[lib, "gsl_sf_airy_zero_Bi", {"CInt"} -> "CDouble"];
+gslAiryZeroBi[n_Integer] := iAiryZeroBi[n];
+
+iAiryZeroAiDeriv = ForeignFunctionLoad[lib, "gsl_sf_airy_zero_Ai_deriv", {"CInt"} -> "CDouble"];
+gslAiryZeroAiDeriv[n_Integer] := iAiryZeroAiDeriv[n];
+
+iAiryZeroBiDeriv = ForeignFunctionLoad[lib, "gsl_sf_airy_zero_Bi_deriv", {"CInt"} -> "CDouble"];
+gslAiryZeroBiDeriv[n_Integer] := iAiryZeroBiDeriv[n];
+
+
+
+(*
+gslClausen = ForeignFunctionLoad[lib, "gsl_sf_clausen", {"CDouble"} -> "CDouble"];
+Clausen::error = "Error code `1` returned by Clausen.";
+Clausen[x_Real] := gslClausen[x]
+*)
+
+
+
 
 End[];
 
