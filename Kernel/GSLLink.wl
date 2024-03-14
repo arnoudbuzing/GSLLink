@@ -38,7 +38,36 @@ gslMatrixSetIdentity::usage = "gslMatrixSetIdentity[m] sets the matrix m to the 
 gslLinalgCholeskyDecomp1::usage = "gslLinalgCholeskyDecomp[m] computes the Cholesky decomposition of the matrix m.";
 
 gslAiryAi::usage = "gslAiryAi[x] returns the Airy function Ai(x).";
-Clausen::usage = "Clausen[x] returns the Clausen function Cl2(x).";
+gslAiryBi::usage = "gslAiryBi[x] returns the Airy function Bi(x).";
+gslAiryAiScaled::usage = "gslAiryAiScaled[x] returns the scaled Airy function Ai(x).";
+gslAiryBiScaled::usage = "gslAiryBiScaled[x] returns the scaled Airy function Bi(x).";
+gslAiryAiDeriv::usage = "gslAiryAiDeriv[x] returns the derivative of the Airy function Ai(x).";
+gslAiryBiDeriv::usage = "gslAiryBiDeriv[x] returns the derivative of the Airy function Bi(x).";
+gslAiryAiDerivScaled::usage = "gslAiryAiDerivScaled[x] returns the scaled derivative of the Airy function Ai(x).";
+gslAiryBiDerivScaled::usage = "gslAiryBiDerivScaled[x] returns the scaled derivative of the Airy function Bi(x).";
+gslAiryZeroAi::usage = "gslAiryZeroAi[n] returns the nth zero of the Airy function Ai(x).";
+gslAiryZeroBi::usage = "gslAiryZeroBi[n] returns the nth zero of the Airy function Bi(x).";
+gslAiryZeroAiDeriv::usage = "gslAiryZeroAiDeriv[n] returns the nth zero of the derivative of the Airy function Ai(x).";
+gslAiryZeroBiDeriv::usage = "gslAiryZeroBiDeriv[n] returns the nth zero of the derivative of the Airy function Bi(x).";
+
+gslBesselJ0::usage = "gslBesselJ0[x] returns the Bessel function J0(x).";
+gslBesselJ1::usage = "gslBesselJ1[x] returns the Bessel function J1(x).";
+gslBesselJn::usage = "gslBesselJn[n,x] returns the Bessel function Jn(x).";
+gslBesselY0::usage = "gslBesselY0[x] returns the Bessel function Y0(x).";
+gslBesselY1::usage = "gslBesselY1[x] returns the Bessel function Y1(x).";
+gslBesselYn::usage = "gslBesselYn[n,x] returns the Bessel function Yn(x).";
+gslBesselI0::usage = "gslBesselI0[x] returns the modified Bessel function I0(x).";
+gslBesselI1::usage = "gslBesselI1[x] returns the modified Bessel function I1(x).";
+gslBesselIn::usage = "gslBesselIn[n,x] returns the modified Bessel function In(x).";
+gslBesselK0::usage = "gslBesselK0[x] returns the modified Bessel function K0(x).";
+gslBesselK1::usage = "gslBesselK1[x] returns the modified Bessel function K1(x).";
+gslBesselKn::usage = "gslBesselKn[n,x] returns the modified Bessel function Kn(x).";
+
+gslClausen::usage = "gslClausen[x] returns the Clausen function Cl2(x).";
+
+gslHydrogenicR1::usage = "gslHydrogenicR1[z,r] returns the hydrogenic radial function R1(z,r).";
+gslHydrogenicR::usage = "gslHydrogenicR[n,l,z,r] returns the hydrogenic radial function R(n,l,z,r).";
+
 
 Begin["`Private`"];
 
@@ -143,13 +172,66 @@ gslAiryZeroAiDeriv[n_Integer] := iAiryZeroAiDeriv[n];
 iAiryZeroBiDeriv = ForeignFunctionLoad[lib, "gsl_sf_airy_zero_Bi_deriv", {"CInt"} -> "CDouble"];
 gslAiryZeroBiDeriv[n_Integer] := iAiryZeroBiDeriv[n];
 
+(* bessel functions *)
+
+iBesselJ0 = ForeignFunctionLoad[lib, "gsl_sf_bessel_J0", {"CDouble"} -> "CDouble"];
+gslBesselJ0[x_Real] := iBesselJ0[x];
+
+iBesselJ1 = ForeignFunctionLoad[lib, "gsl_sf_bessel_J1", {"CDouble"} -> "CDouble"];
+gslBesselJ1[x_Real] := iBesselJ1[x];
+
+iBesselJn = ForeignFunctionLoad[lib, "gsl_sf_bessel_Jn", {"CInt", "CDouble"} -> "CDouble"];
+gslBesselJn[n_Integer, x_Real] := iBesselJn[n, x];
+
+iBesselY0 = ForeignFunctionLoad[lib, "gsl_sf_bessel_Y0", {"CDouble"} -> "CDouble"];
+gslBesselY0[x_Real] := iBesselY0[x];
+
+iBesselY1 = ForeignFunctionLoad[lib, "gsl_sf_bessel_Y1", {"CDouble"} -> "CDouble"];
+gslBesselY1[x_Real] := iBesselY1[x];
+
+iBesselYn = ForeignFunctionLoad[lib, "gsl_sf_bessel_Yn", {"CInt", "CDouble"} -> "CDouble"];
+gslBesselYn[n_Integer, x_Real] := iBesselYn[n, x];
+
+iBesselI0 = ForeignFunctionLoad[lib, "gsl_sf_bessel_I0", {"CDouble"} -> "CDouble"];
+gslBesselI0[x_Real] := iBesselI0[x];
+
+iBesselI1 = ForeignFunctionLoad[lib, "gsl_sf_bessel_I1", {"CDouble"} -> "CDouble"];
+gslBesselI1[x_Real] := iBesselI1[x];
+
+iBesselIn = ForeignFunctionLoad[lib, "gsl_sf_bessel_In", {"CInt", "CDouble"} -> "CDouble"];
+gslBesselIn[n_Integer, x_Real] := iBesselIn[n, x];
+
+iBesselK0 = ForeignFunctionLoad[lib, "gsl_sf_bessel_K0", {"CDouble"} -> "CDouble"];
+gslBesselK0[x_Real] := iBesselK0[x];
+
+iBesselK1 = ForeignFunctionLoad[lib, "gsl_sf_bessel_K1", {"CDouble"} -> "CDouble"];
+gslBesselK1[x_Real] := iBesselK1[x];
+
+iBesselKn = ForeignFunctionLoad[lib, "gsl_sf_bessel_Kn", {"CInt", "CDouble"} -> "CDouble"];
+gslBesselKn[n_Integer, x_Real] := iBesselKn[n, x];
+
+(* etc for bessel *)
+
+(* Clausen function *)
+
+iClausen = ForeignFunctionLoad[lib, "gsl_sf_clausen", {"CDouble"} -> "CDouble"];
+gslClausen[x_Real] := iClausen[x]
+
+(* Coulomb *)
+
+(* double gsl_sf_hydrogenicR_1(double Z, double r) *)
+
+iHydrogenicR1 = ForeignFunctionLoad[lib, "gsl_sf_hydrogenicR_1", {"CDouble", "CDouble"} -> "CDouble"];
+gslHydrogenicR1[z_Real, r_Real] := iHydrogenicR1[z, r];
+
+iHydrogenicR = ForeignFunctionLoad[lib, "gsl_sf_hydrogenicR", {"CInt", "CInt", "CDouble", "CDouble"} -> "CDouble"];
+gslHydrogenicR[n_Integer, l_Integer, z_Real, r_Real] := iHydrogenicR[n, l, z, r];
 
 
-(*
-gslClausen = ForeignFunctionLoad[lib, "gsl_sf_clausen", {"CDouble"} -> "CDouble"];
-Clausen::error = "Error code `1` returned by Clausen.";
-Clausen[x_Real] := gslClausen[x]
-*)
+
+
+
+(* double gsl_sf_hydrogenicR_2(double Z, double r) *)
 
 
 
