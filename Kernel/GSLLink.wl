@@ -50,7 +50,14 @@ AiryBiPrimeZero::usage = "AiryBiPrimeZero[n] returns the n-th zero of the deriva
 Begin["`Private`"];
 
 this = DirectoryName[ $InputFileName ];
-lib = FileNameJoin[{this,"Libraries",$SystemID,"libgsl.27.dylib"}];
+
+lib = Switch[
+    $SystemID,
+    "MacOSX-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
+    "MacOSX-ARM64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
+    "Windows-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"gsl.lib"}],
+    "Linux-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.so"}]
+]
 
 (* types *)
 GSLCOMPLEX = {"CDouble", "CDouble"};
@@ -123,13 +130,13 @@ GSLSFLEGENDREFULL = 3;
 
 Get[ FileNameJoin[{this, "SpecialFunctionSignatures.wl"}] ];
 
-AiryAiScaled[x_] := gsl˘sf˘airy˘Ai˘scaled[x, 0]
-AiryAiPrimeScaled[x_] := gsl˘sf˘airy˘Ai˘deriv˘scaled[x, 0]
-AiryAiPrimeZero[n_] := gsl˘sf˘airy˘zero˘Ai˘deriv[n]
+AiryAiScaled[x_] := gsl$sf$airy$Ai$scaled[x, 0]
+AiryAiPrimeScaled[x_] := gsl$sf$airy$Ai$deriv$scaled[x, 0]
+AiryAiPrimeZero[n_] := gsl$sf$airy$zero$Ai$deriv[n]
 
-AiryBiScaled[x_] := gsl˘sf˘airy˘Bi˘scaled[x, 0]
-AiryBiPrimeScaled[x_] := gsl˘sf˘airy˘Bi˘deriv˘scaled[x, 0]
-AiryBiPrimeZero[n_] := gsl˘sf˘airy˘zero˘Bi˘deriv[n]
+AiryBiScaled[x_] := gsl$sf$airy$Bi$scaled[x, 0]
+AiryBiPrimeScaled[x_] := gsl$sf$airy$Bi$deriv$scaled[x, 0]
+AiryBiPrimeZero[n_] := gsl$sf$airy$zero$Bi$deriv[n]
 
 
 End[];

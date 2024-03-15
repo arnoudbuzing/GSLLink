@@ -11,7 +11,46 @@
             ,
             "Hash"
             ->
-            "1e3c9c7c4649c902562ae858c26be4ad9f985ff70058f888f116e5406bab5db1"
+            "d16b307870bc41212b9e8e76993a2c0255badd9ff79919eeca74df53094402b5"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/Linux-x86-64/libgslcblas.so"
+            ]
+            ,
+            "Hash"
+            ->
+            "eaa379f74015b0e3de124b3f4ce5e68fde5457d24bec19dcc5cc64ada70556cb"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/Linux-x86-64/libgsl.so"
+            ]
+            ,
+            "Hash"
+            ->
+            "c95701ec6618b7619f4437d3f593a7070691c61be4ddb3aae05e76e0a08725a5"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/MacOSX-ARM64/libc2pa_c.dylib"
+            ]
+            ,
+            "Hash"
+            ->
+            "c08622fed71eaaee7c963712a7f9b6001dfe6ca96e0e86ab0d57d306ad3c12d7"
                 
         |>
         ,
@@ -32,12 +71,90 @@
             "File"
             ->
             File[
+                "Kernel/Libraries/MacOSX-ARM64/libgslcblas.dylib"
+            ]
+            ,
+            "Hash"
+            ->
+            "086c07605cdc08377c51eda0e73302cb29431bdbc167ed724504cc50c7f72dba"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/MacOSX-ARM64/libgsl.dylib"
+            ]
+            ,
+            "Hash"
+            ->
+            "d8b179c3636fa0555e8b0d234f242a97d3ba7732f6cae33170701ede768c364a"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/MacOSX-x86-64/libgslcblas.dylib"
+            ]
+            ,
+            "Hash"
+            ->
+            "5d459dcd0b349b2df28473388dc3e9cf44f271da8a54c9814ce96c1351c46bf1"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/MacOSX-x86-64/libgsl.dylib"
+            ]
+            ,
+            "Hash"
+            ->
+            "ea233452508099841bf261764ae6abb4bf7447ba3b78f163d5609eab56b47f01"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/Windows-x86-64/gslcblas.lib"
+            ]
+            ,
+            "Hash"
+            ->
+            "f11050a83c67e0da4f9efb62c062c48e4c7621c0dc92c0f85d9e2fdbd31543e5"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/Windows-x86-64/gsl.lib"
+            ]
+            ,
+            "Hash"
+            ->
+            "6c9fe9d9bbf780cb8a040dc7b5ddecebddd1cd37914f7e1058d21c7d5395d27f"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
                 "Kernel/SpecialFunctionSignatures.wl"
             ]
             ,
             "Hash"
             ->
-            "9d7b993270ed2661939597679c6559980cd9541dc2d358ac0ad8ea0c8fe20ab9"
+            "c5824ceff28e50fad754cf69f0eb2e6c65e64148077a2ac31a6f5d70683ed7f2"
                 
         |>
         ,
