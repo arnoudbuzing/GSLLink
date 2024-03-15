@@ -1,0 +1,44 @@
+<|
+    "Files"
+    ->
+    {
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/GSLLink.wl"
+            ]
+            ,
+            "Hash"
+            ->
+            "1e3c9c7c4649c902562ae858c26be4ad9f985ff70058f888f116e5406bab5db1"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/MacOSX-ARM64/libgsl.27.dylib"
+            ]
+            ,
+            "Hash"
+            ->
+            "24524f7fc277781a91cf4c581e73601861aae582e83c52ccab7f9fda9957a14e"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/SpecialFunctionSignatures.wl"
+            ]
+            ,
+            "Hash"
+            ->
+            "9d7b993270ed2661939597679c6559980cd9541dc2d358ac0ad8ea0c8fe20ab9"
+                
+        |>
+    }
+|>
