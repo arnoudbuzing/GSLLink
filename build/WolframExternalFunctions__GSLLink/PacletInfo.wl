@@ -20,6 +20,11 @@ PacletObject[
           "WolframExternalFunctions`GSLLink`AiryBiPrimeScaled",
           "WolframExternalFunctions`GSLLink`AiryBiPrimeZero"
         }
+      },
+      {
+        "Documentation",
+        "Root" -> "Documentation",
+        "Language" -> "English"
       }
     }
   |>
