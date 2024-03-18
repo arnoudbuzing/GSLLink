@@ -18,7 +18,10 @@ PacletObject[
           "WolframExternalFunctions`GSLLink`AiryAiPrimeZero",
           "WolframExternalFunctions`GSLLink`AiryBiScaled",
           "WolframExternalFunctions`GSLLink`AiryBiPrimeScaled",
-          "WolframExternalFunctions`GSLLink`AiryBiPrimeZero"
+          "WolframExternalFunctions`GSLLink`AiryBiPrimeZero",
+          "WolframExternalFunctions`GSLLink`ClausenC2",
+          "WolframExternalFunctions`GSLLink`HydrogenicRadial",
+          "WolframExternalFunctions`GSLLink`FermiDiracIntegral"
         }
       },
       {

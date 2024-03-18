@@ -11,7 +11,7 @@
             ,
             "Hash"
             ->
-            "d16b307870bc41212b9e8e76993a2c0255badd9ff79919eeca74df53094402b5"
+            "70690f896f6df4132b81501d9ad53393e03ebaf07008993702c12cf4feb15c51"
                 
         |>
         ,
@@ -123,12 +123,38 @@
             "File"
             ->
             File[
+                "Kernel/Libraries/Windows-x86-64/gslcblas.dll"
+            ]
+            ,
+            "Hash"
+            ->
+            "e5993e66724f44d4b9059aa320c219df7d7b58035251128ad1daec8d51da7e68"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
                 "Kernel/Libraries/Windows-x86-64/gslcblas.lib"
             ]
             ,
             "Hash"
             ->
             "f11050a83c67e0da4f9efb62c062c48e4c7621c0dc92c0f85d9e2fdbd31543e5"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/Libraries/Windows-x86-64/gsl.dll"
+            ]
+            ,
+            "Hash"
+            ->
+            "00dfc66167f4b0e6212eff4611f8ace4b824aa726a617017bde29f8924a60aff"
                 
         |>
         ,

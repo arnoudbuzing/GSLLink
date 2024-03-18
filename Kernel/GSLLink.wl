@@ -47,6 +47,13 @@ AiryBiScaled::usage = "AiryBiScaled[x] returns the scaled Airy function Bi.";
 AiryBiPrimeScaled::usage = "AiryBiPrimeScaled[x] returns the scaled derivative of the Airy function Bi.";
 AiryBiPrimeZero::usage = "AiryBiPrimeZero[n] returns the n-th zero of the derivative of the Airy function Bi.";
 
+ClausenC2::usage = "ClausenC2[x] returns the Clausen function C2.";
+
+HydrogenicRadial::usage = "HydrogenicRadial[n,l,z,r] returns the radial wave function for a hydrogenic atom.";
+
+FermiDiracIntegral::usage = "FermiDiracIntegral[j,x] returns the j-th order Fermi-Dirac integral.";
+RiemannZetaMinusOne::usage = "RiemannZetaMinusOne[x] returns the Riemann zeta function minus one.";
+
 Begin["`Private`"];
 
 this = DirectoryName[ $InputFileName ];
@@ -55,7 +62,7 @@ lib = Switch[
     $SystemID,
     "MacOSX-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
     "MacOSX-ARM64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
-    "Windows-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"gsl.lib"}],
+    "Windows-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"gsl.dll"}],
     "Linux-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.so"}]
 ]
 
@@ -130,13 +137,35 @@ GSLSFLEGENDREFULL = 3;
 
 Get[ FileNameJoin[{this, "SpecialFunctionSignatures.wl"}] ];
 
-AiryAiScaled[x_] := gsl$sf$airy$Ai$scaled[x, 0]
-AiryAiPrimeScaled[x_] := gsl$sf$airy$Ai$deriv$scaled[x, 0]
-AiryAiPrimeZero[n_] := gsl$sf$airy$zero$Ai$deriv[n]
+AiryAiScaled[x_Real?NumericQ] := gsl$sf$airy$Ai$scaled[x, 0]
+AiryAiPrimeScaled[x_Real?NumericQ] := gsl$sf$airy$Ai$deriv$scaled[x, 0]
+AiryAiPrimeZero[n_Integer?NumericQ] := gsl$sf$airy$zero$Ai$deriv[n]
 
-AiryBiScaled[x_] := gsl$sf$airy$Bi$scaled[x, 0]
-AiryBiPrimeScaled[x_] := gsl$sf$airy$Bi$deriv$scaled[x, 0]
-AiryBiPrimeZero[n_] := gsl$sf$airy$zero$Bi$deriv[n]
+AiryBiScaled[x_Real?NumericQ] := gsl$sf$airy$Bi$scaled[x, 0]
+AiryBiPrimeScaled[x_Real?NumericQ] := gsl$sf$airy$Bi$deriv$scaled[x, 0]
+AiryBiPrimeZero[n_Integer?NumericQ] := gsl$sf$airy$zero$Bi$deriv[n]
+
+ClausenC2[x_Real?NumericQ] := gsl$sf$clausen[x]
+
+HydrogenicRadial[n_Integer?NumericQ, l_Integer?NumericQ, z_Real?NumericQ, r_Real?NumericQ] := gsl$sf$hydrogenicR[n, l, z, r]
+
+FermiDiracIntegral[j_Integer?NumericQ, x_Real?NumericQ] := gsl$sf$fermi$dirac$int[j, x]
+
+
+RiemannZetaMinusOne[x_Real?NumericQ] := gsl$sf$zetam1[x]
+RiemannZetaMinusOne[n_Integer?NumericQ] := gsl$sf$zetam1$int[n]
+
+
+(*
+    This is HurwitzZeta in WL:
+    double gsl_sf_hzeta(double s, double q)
+*)
+
+(* 
+    This is DiricletEta in WL:
+    double gsl_sf_eta_int(int n)
+    double gsl_sf_eta(double s)
+*)
 
 
 End[];
