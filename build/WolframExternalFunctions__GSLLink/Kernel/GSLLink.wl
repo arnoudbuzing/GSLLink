@@ -48,10 +48,12 @@ AiryBiPrimeScaled::usage = "AiryBiPrimeScaled[x] returns the scaled derivative o
 AiryBiPrimeZero::usage = "AiryBiPrimeZero[n] returns the n-th zero of the derivative of the Airy function Bi.";
 
 ClausenC2::usage = "ClausenC2[x] returns the Clausen function C2.";
-
 HydrogenicRadial::usage = "HydrogenicRadial[n,l,z,r] returns the radial wave function for a hydrogenic atom.";
-
 FermiDiracIntegral::usage = "FermiDiracIntegral[j,x] returns the j-th order Fermi-Dirac integral.";
+TriGamma::usage = "TriGamma[x] returns the trigamma function.";
+SynchrotronFunction::usage = "SynchrotronFunction[n,x] returns the n-th order synchrotron function.";
+TransportFunction::usage = "TransportFunction[n,x] returns the n-th order transport function.";
+RiemannZetaMinusOne::usage = "RiemannZetaMinusOne[x] returns the Riemann zeta function minus one.";
 
 Begin["`Private`"];
 
@@ -59,10 +61,17 @@ this = DirectoryName[ $InputFileName ];
 
 lib = Switch[
     $SystemID,
-    "MacOSX-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
-    "MacOSX-ARM64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
-    "Windows-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"gsl.dll"}],
-    "Linux-x86-64",FileNameJoin[{this,"Libraries",$SystemID,"libgsl.so"}]
+    "MacOSX-x86-64",
+        LibraryLoad[FileNameJoin[{this,"Libraries",$SystemID,"libgslcblas.dylib"}]];
+        FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
+    "MacOSX-ARM64",
+        FileNameJoin[{this,"Libraries",$SystemID,"libgsl.dylib"}],
+    "Windows-x86-64",
+        LibraryLoad[FileNameJoin[{this,"Libraries",$SystemID,"gslcblas.dll"}]];
+        FileNameJoin[{this,"Libraries",$SystemID,"gsl.dll"}],
+    "Linux-x86-64",
+        LibraryLoad[FileNameJoin[{this,"Libraries",$SystemID,"libgslcblas.so"}]];
+        FileNameJoin[{this,"Libraries",$SystemID,"libgsl.so"}]
 ]
 
 (* types *)
@@ -149,6 +158,33 @@ ClausenC2[x_Real?NumericQ] := gsl$sf$clausen[x]
 HydrogenicRadial[n_Integer?NumericQ, l_Integer?NumericQ, z_Real?NumericQ, r_Real?NumericQ] := gsl$sf$hydrogenicR[n, l, z, r]
 
 FermiDiracIntegral[j_Integer?NumericQ, x_Real?NumericQ] := gsl$sf$fermi$dirac$int[j, x]
+
+SynchrotronFunction[1, x_Real?NumericQ/;x>0] := gsl$sf$synchrotron$1[x]
+SynchrotronFunction[2, x_Real?NumericQ/;x>0] := gsl$sf$synchrotron$2[x]
+
+TriGamma[x_Integer?NumericQ] := gsl$sf$psi$1$int[x]
+TriGamma[x_Real?NumericQ] := gsl$sf$psi$1[x]
+
+TransportFunction[2, x_Real?NumericQ/;x>0] := gsl$sf$transport$2[x]
+TransportFunction[3, x_Real?NumericQ/;x>0] := gsl$sf$transport$3[x]
+TransportFunction[4, x_Real?NumericQ/;x>0] := gsl$sf$transport$4[x]
+TransportFunction[5, x_Real?NumericQ/;x>0] := gsl$sf$transport$5[x]
+
+RiemannZetaMinusOne[x_Real?NumericQ] := gsl$sf$zetam1[x]
+RiemannZetaMinusOne[n_Integer?NumericQ] := gsl$sf$zetam1$int[n]
+
+
+(*
+    This is HurwitzZeta in WL:
+    double gsl_sf_hzeta(double s, double q)
+*)
+
+(* 
+    This is DiricletEta in WL:
+    double gsl_sf_eta_int(int n)
+    double gsl_sf_eta(double s)
+*)
+
 
 End[];
 
